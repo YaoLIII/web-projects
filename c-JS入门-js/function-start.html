@@ -34,10 +34,34 @@
   <body>
     <button>Display message box</button>
 
+<!--     <div class='msgBox'>
+      <p>This is a message box</p>
+      <button>x</button>
+    </div>    --> 
+
     <script>
       function displayMsg(){
+        var html = document.querySelector('html');
 
+        var panel = document.createElement('div');
+        panel.setAttribute('class','msgBox');
+        html.appendChild(panel);
+
+        var msg = document.createElement('p');
+        msg.textContent = 'This is a message.';
+        panel.appendChild(msg);
+
+        var closeBtn = document.createElement('button');
+        closeBtn.textContent = 'x';
+        panel.appendChild(closeBtn);
+
+        closeBtn.onclick = function() {
+          panel.parentNode.removeChild(panel);
+        }
       }
+      
+      var btn = document.querySelector('button');
+      btn.onclick = displayMsg;
     </script>
   </body>
 </html>
