@@ -9,7 +9,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
-        width: 200px;
+        width: 242px;
         background: #eee;
       }
 
@@ -17,6 +17,9 @@
         line-height: 1.5;
         padding: 10px 20px;
         color: #333;
+        padding-left: 82px;
+        background-position: 25px center;
+        background-repeat: no-repeat;
       }
 
       .msgBox button {
@@ -40,7 +43,7 @@
     </div>    --> 
 
     <script>
-      function displayMsg(){
+      function displayMsg(msgText, msgType){
         var html = document.querySelector('html');
 
         var panel = document.createElement('div');
@@ -48,7 +51,7 @@
         html.appendChild(panel);
 
         var msg = document.createElement('p');
-        msg.textContent = 'This is a message.';
+        msg.textContent = msgText;
         panel.appendChild(msg);
 
         var closeBtn = document.createElement('button');
@@ -58,10 +61,23 @@
         closeBtn.onclick = function() {
           panel.parentNode.removeChild(panel);
         }
+
+        if (msgType === 'warning') {
+          msg.style.backgroundImage = 'url(icon/warning.png)';
+          panel.style.backgroundColor = 'red';
+        } else if(msgType === 'chat') {
+          panel.style.backgroundColor = 'aqua';
+        } else {
+          msg.style.paddingLeft = '20px';
+        }
       }
       
       var btn = document.querySelector('button');
-      btn.onclick = displayMsg;
+      // btn.displayMsg; 必须隐式调用，否则函数直接运行
+      // 因此对于带参函数，用匿名函数调用
+      btn.onclick = function(){
+        displayMsg('Woo, this is a different massage!','chat')
+      };
     </script>
   </body>
 </html>
